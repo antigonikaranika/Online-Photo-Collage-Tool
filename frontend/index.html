@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photo Collage Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Create Your Photo Collage</h1>
+
+    <form id="collageForm">
+        <label>Select Images:</label><br>
+        <input type="file" name="images" multiple required><br><br>
+
+        <label>Collage Type:</label><br>
+        <select name="collage_type" required>
+            <option value="horizontal">Horizontal</option>
+            <option value="vertical">Vertical</option>
+        </select><br><br>
+
+        <label>Border Size (px):</label><br>
+        <input type="number" name="border_size" value="5"><br><br>
+
+        <label>Border Color:</label><br>
+        <input type="color" name="border_color" value="#000000"><br><br>
+
+        <button type="submit">Create Collage</button>
+    </form>
+
+    <div id="loading">Creating your collage... Please wait.</div>
+    <div id="result"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
