@@ -1,25 +1,150 @@
 body {
     font-family: Arial, sans-serif;
+    padding: 40px;
+    background-color: #b4d5ec;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.page-title {
     text-align: center;
-    margin: 30px;
-}
-
-form {
-    display: inline-block;
-    text-align: left;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-#loading {
-    margin-top: 20px;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #2c3e50;
     font-weight: bold;
-    color: #ff6600;
 }
-
-#result {
-    margin-top: 20px;
+  
+.custom-upload-btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
+  
+.custom-upload-btn:hover {
+    background-color: #2980b9;
+  }
+  
+.container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+}
+    
+.controls, .preview {
+        padding: 25px;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        min-width: 300px;
+}
+    
+.controls h3,
+.preview h3 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 20px;
+        color: #333;
+}
+    
+.controls input[type="file"] {
+        margin-bottom: 15px;
+}
+    
+.image-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+    
+.image-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        background: #f0f0f0;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    
+.image-item button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+    }
+    
+.image-item button:hover {
+        background-color: #c0392b;
+      }
+    
+.controls div {
+        margin-top: 10px;
+      }
+    
+input[type="number"] {
+        padding: 6px;
+        margin-left: 8px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+      }
+input[type="color"] {
+        padding: 0px;
+        margin-left: 8px;
+        border-radius: 1px;
+        border: 1px solid #ccc;
+      }
+    
+      button#create-btn {
+        margin-top: 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        font-size: 14px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    
+      button#create-btn:hover {
+        background-color: #2980b9;
+      }
+    
+      #download-link {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        background-color: #2ecc71;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 6px;
+      }
+    
+      #download-link:hover {
+        background-color: #27ae60;
+      }
+    
+      .preview img {
+        max-width: 100%;
+        max-height: 300px;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+    
+      .preview p {
+        margin-top: 20px;
+        color: #555;
+      }

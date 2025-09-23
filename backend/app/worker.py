@@ -1,4 +1,4 @@
-from backend.app.celery_config import celery
+from celery_config import celery
 
 
 # Run this file to start the Celery worker:

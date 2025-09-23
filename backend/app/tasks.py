@@ -1,8 +1,8 @@
 import os
 import uuid
 import time
-from backend.app.celery_config import celery
-from backend.app.utils.image_processing import resize_images, combine_images
+from celery_config import celery
+from utils.image_processing import resize_images, combine_images
 
 @celery.task(name='tasks.process_collage_task')
 def process_collage_task(image_paths, collage_type, border_size, border_color):

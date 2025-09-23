@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Photo Collage Tool</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Photo Collage Tool</title>
+  <link rel="stylesheet" href="styles.css">
+  
 </head>
 <body>
+    <h1 class="page-title">Create Your Photo Collage</h1>
+  <div class="container">
+    <!-- Upload and settings -->
+    <div class="controls">
+      <h3>Upload Image</h3>
+      <label for="image-input" class="custom-upload-btn">📁 Choose Images</label>
+      <input type="file" id="image-input" multiple style="display: none;">
 
-    <h1>Create Your Photo Collage</h1>
+      <ul id="image-list" class="image-list"></ul>
 
-    <form id="collageForm">
-        <label>Select Images:</label><br>
-        <input type="file" name="images" multiple required><br><br>
+      <div>
+        <input type="radio" name="type" value="horizontal" checked> Horizontal collage
+        <input type="radio" name="type" value="vertical"> Vertical collage
+      </div>
 
-        <label>Collage Type:</label><br>
-        <select name="collage_type" required>
-            <option value="horizontal">Horizontal</option>
-            <option value="vertical">Vertical</option>
-        </select><br><br>
+      <div>
+        <label>Border (px): <input type="number" id="border-size" value="5" min="0"></label>
+      </div>
 
-        <label>Border Size (px):</label><br>
-        <input type="number" name="border_size" value="5"><br><br>
+      <div>
+        <label>Color: <input type="color" id="border-color" value="#000000"></label>
+      </div>
 
-        <label>Border Color:</label><br>
-        <input type="color" name="border_color" value="#000000"><br><br>
+      <button id="create-btn">Make Collage</button>
+    </div>
 
-        <button type="submit">Create Collage</button>
-    </form>
+    <!-- Collage preview and download -->
+    <div class="preview">
+      <h3>Preview</h3>
+      <div id="preview-area">
+        <p>No collage yet.</p>
+      </div>
+      <a id="download-link" href="#" download style="display:none;">Download</a>
+    </div>
+  </div>
 
-    <div id="loading">Creating your collage... Please wait.</div>
-    <div id="result"></div>
+  <script src="script.js"></script>
 
-    <script src="script.js"></script>
 </body>
 </html>

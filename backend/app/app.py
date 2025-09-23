@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 import os
-from dotenv import load_dotenv
-load_dotenv()
+
 
 from werkzeug.utils import secure_filename
 import uuid
@@ -27,6 +26,7 @@ celery.conf.update(app.config)
 # Create Collage Task Endpoint
 # ----------------------------
 @app.route('/create-task', methods=['POST'])
+
 def create_task():
     files = request.files.getlist('images')
     collage_type = request.form.get('collage_type')
@@ -94,18 +94,19 @@ def get_collage(collage_id):
         return jsonify({'error': 'Collage not found.'}), 404
 
 # Serve Frontend Files
+
 @app.route('/')
 def serve_index():
-    # Go up two levels to reach frontend folder
-    return send_from_directory(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../frontend')), 'index.html')
+    return send_from_directory('frontend', 'index.html')
 
 @app.route('/<path:filename>')
 def serve_static_files(filename):
-    return send_from_directory(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../frontend')), filename)
+    return send_from_directory('frontend', filename)
 
 
 # -----------------------------
 # Run Flask
 # -----------------------------
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
+

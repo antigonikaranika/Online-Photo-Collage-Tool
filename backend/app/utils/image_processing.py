@@ -29,34 +29,60 @@ def resize_images(image_paths, collage_type):
 
     return resized_images
 
-from PIL import Image
+from PIL import Image, ImageColor
+
+def add_border_to_image(img, border_size, border_color):
+    bordered_img = Image.new(
+        'RGB',
+        (img.width + 2 * border_size, img.height + 2 * border_size),
+        border_color
+    )
+    bordered_img.paste(img, (border_size, border_size))
+    return bordered_img
+
 
 def combine_images(images, collage_type, border_size, border_color, save_path):
-    # Assume 'images' is a list of PIL Image objects
+    if not images:
+        raise ValueError("No images provided.")
 
-    widths, heights = zip(*(img.size for img in images))
+    # Convert hex to RGB
+    try:
+        border_rgb = ImageColor.getrgb(border_color)
+    except ValueError:
+        raise ValueError("Invalid border color format.")
+
+    # Add inner border to each image
+    bordered_images = [add_border_to_image(img, border_size, border_rgb) for img in images]
+
+    widths, heights = zip(*(img.size for img in bordered_images))
 
     if collage_type == 'horizontal':
-        total_width = sum(widths) + border_size * (len(images) - 1)
-        max_height = max(heights)
-        collage_image = Image.new('RGB', (total_width, max_height), border_color)
+        total_width = sum(widths) + 2 * border_size  # extra left/right padding
+        max_height = max(heights) + 2 * border_size  # extra top/bottom padding
 
-        x_offset = 0
-        for img in images:
-            collage_image.paste(img, (x_offset, 0))
-            x_offset += img.width + border_size
+        collage_image = Image.new('RGB', (total_width, max_height), border_rgb)
+
+        x_offset = border_size  # start after left border
+        for img in bordered_images:
+            y_offset = (max_height - img.height) // 2
+            collage_image.paste(img, (x_offset, y_offset))
+            x_offset += img.width
 
     else:  # vertical
-        max_width = max(widths)
-        total_height = sum(heights) + border_size * (len(images) - 1)
-        collage_image = Image.new('RGB', (max_width, total_height), border_color)
+        max_width = max(widths) + 2 * border_size  # extra left/right padding
+        total_height = sum(heights) + 2 * border_size  # extra top/bottom padding
 
-        y_offset = 0
-        for img in images:
-            collage_image.paste(img, (0, y_offset))
-            y_offset += img.height + border_size
+        collage_image = Image.new('RGB', (max_width, total_height), border_rgb)
 
-    # Save the collage at the exact provided path
+        y_offset = border_size  # start after top border
+        for img in bordered_images:
+            x_offset = (max_width - img.width) // 2
+            collage_image.paste(img, (x_offset, y_offset))
+            y_offset += img.height
+
     collage_image.save(save_path)
+
+
+
 
 
