@@ -95,9 +95,33 @@ def get_collage(collage_id):
 
 # Serve Frontend Files
 
+import shutil
+
 @app.route('/')
 def serve_index():
+    uploads_folder = os.path.abspath('static/uploads')
+    collages_folder = os.path.abspath('static/collages')
+
+    try:
+        # Remove all files in uploads folder
+        for filename in os.listdir(uploads_folder):
+            file_path = os.path.join(uploads_folder, filename)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+    except Exception as e:
+        print(f"[Warning] Could not clean uploads folder: {e}")
+
+    try:
+        # Remove all files in collages folder
+        for filename in os.listdir(collages_folder):
+            file_path = os.path.join(collages_folder, filename)
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+    except Exception as e:
+        print(f"[Warning] Could not clean collages folder: {e}")
+
     return send_from_directory('frontend', 'index.html')
+
 
 @app.route('/<path:filename>')
 def serve_static_files(filename):
