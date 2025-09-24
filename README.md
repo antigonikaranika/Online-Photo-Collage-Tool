@@ -30,7 +30,6 @@ online-photo-collage-tool/
 │   │   ├── celery_config.py
 │   │   ├── tasks.py
 │   │   ├── worker.py
-│   │   └── ...
 │   ├── Dockerfile
 │   └── requirements.txt
 ├── frontend/
@@ -59,7 +58,7 @@ docker-compose up --build
 
 ### 2. Automatic Cleanup
 
-- Celery Beat automatically removes old collage files from `static/collages` after 30 minutes and everytime the page is refreshed.
+- Celery Beat automatically removes old collage files from `static/collages` after 30 minutes and the files from `static/uploads` everytime the page is refreshed.
 
 ---
 
@@ -77,7 +76,7 @@ Handled automatically by `docker-compose.yml`.
 
 ## 🧪 Local Development (without Docker)
 
-> Optional — in case you don't have Docker installed
+> In case you don't have Docker installed
 
 ### 1. Install Python dependencies
 
@@ -115,11 +114,11 @@ celery -A celery_config beat --loglevel=info
 
 ## API Endpoints
 
-| Method | Endpoint             | Description                              |
-|--------|----------------------|------------------------------------------|
-| POST   | `/create-task`       | Submits images + settings for processing |
-| GET    | `/task-status/<id>`  | Checks task status                       |
-| GET    | `/get-collage/<id>`  | Returns generated collage image          |
+| Method | Endpoint             | Description                                              |
+|--------|----------------------|----------------------------------------------------------|
+| POST   | `/create-task`       | Creates image processing task and returns a task id      |
+| GET    | `/task-status/<id>`  | Returns either IN_PROGRESS or a collage id (task status) |
+| GET    | `/get-collage/<id>`  | Returns generated collage image                          |
 
 ---
 
