@@ -1,6 +1,6 @@
 # Online Photo Collage Tool
 
-An online web app to create horizontal or vertical photo collages with customizable borders, inspired by a project idea from **DevProjects**. Built with Flask, Celery, Redis, and Docker. The project's prompt can be found at [https://www.codementor.io/projects/web/online-photo-collage-tool-atx32mwend].
+An online web app to create horizontal or vertical photo collages with customizable borders, inspired by a project idea from [DevProjects](http://www.codementor.io/projects). Built with Flask, Celery, Redis, and Docker. The project's prompt can be found at [Online Photo Collage Tool](https://www.codementor.io/projects/web/online-photo-collage-tool-atx32mwend).
 
 ---
 
