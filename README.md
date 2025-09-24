@@ -151,7 +151,7 @@ celery -A celery_config beat --loglevel=info
 
 ---
 
-## Authors
+## Author
 
 - Developed by Antigoni Karanika
 - Powered by Flask, Celery, Redis, Docker
