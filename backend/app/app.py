@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, send_from_directory
 import os
 
+from dotenv import load_dotenv
+load_dotenv()
 
 from werkzeug.utils import secure_filename
 import uuid
@@ -14,6 +16,8 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+IS_DOCKER = os.getenv('IS_DOCKER', '1') == '1'
 
 # Use REDIS_URL environment variable or default to localhost for local dev
 app.config['broker_url'] = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
@@ -120,12 +124,24 @@ def serve_index():
     except Exception as e:
         print(f"[Warning] Could not clean collages folder: {e}")
 
-    return send_from_directory('frontend', 'index.html')
+    if IS_DOCKER:
+        # In Docker:
+        return send_from_directory('frontend', 'index.html')
+    else:
+        # Local: 
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
+        return send_from_directory(os.path.join(project_root, 'frontend'), "index.html")
 
 
 @app.route('/<path:filename>')
 def serve_static_files(filename):
-    return send_from_directory('frontend', filename)
+    if IS_DOCKER:
+        # In Docker: 
+        return send_from_directory('frontend', filename)
+    else:
+        # Local: 
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
+        return send_from_directory(os.path.join(project_root, 'frontend'), filename)
 
 
 # -----------------------------
@@ -133,4 +149,3 @@ def serve_static_files(filename):
 # -----------------------------
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
-
