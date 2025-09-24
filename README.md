@@ -51,6 +51,11 @@ online-photo-collage-tool/
 ```bash
 docker-compose up --build
 ```
+To terminate the docker use:
+
+```bash
+docker-compose down
+```
 
 - The Flask app will be available at: [http://localhost:5000](http://localhost:5000)
 - Redis runs internally on port `6379`
@@ -98,6 +103,7 @@ redis-cli ping
 Create an .env file inside backend/app and type:
 
 ```bash
+IS_DOCKER=0         # If you want to use Docker later erase this line
 REDIS_URL=redis://localhost:6379/0
 ```
 
@@ -110,13 +116,13 @@ sudo systemctl stop redis
 ### 3. Run Flask App
 
 ```bash
-cd backend/app
-python app.py
+python backend/app/app.py
 ```
 
 ### 4. Start Celery Worker
 
 ```bash
+cd backend/app
 celery -A celery_config worker --loglevel=info
 ```
 
