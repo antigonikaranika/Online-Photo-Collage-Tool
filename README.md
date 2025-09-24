@@ -116,7 +116,7 @@ sudo systemctl stop redis
 ### 3. Run Flask App
 
 ```bash
-python backend/app/app.py
+python backend/app/app.py  # In project's root directory
 ```
 
 ### 4. Start Celery Worker
@@ -129,6 +129,7 @@ celery -A celery_config worker --loglevel=info
 ### 5. Start Celery Beat (for cleanup tasks)
 
 ```bash
+cd backend/app
 celery -A celery_config beat --loglevel=info
 ```
 
